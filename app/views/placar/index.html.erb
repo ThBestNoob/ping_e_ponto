@@ -1,0 +1,136 @@
+<div class= "header" onload="start()">
+    Ping e Ponto
+</div>
+<!--<div class="row" style='padding: 10px;'></div>-->
+<div class="row">
+    
+    <div id="sidepanel" onclick="togglePanel()">
+        <div id='statistics'></div>
+    </div>
+    <div id="cadPanel">
+        <div class='row'>	 
+            <div id='groupIco' onclick='toggleCad()'><img src='group.png' height="25px"></div>
+
+            <div class='col-sm-12' id='cadCol'>
+                <!--
+                <div id='cad'>
+                    <p><strong>Gustavo</strong></p>
+                    <p>Vitórias: 0</p>						
+                </div>
+                <div id='cad'>
+                    <p><strong>Felipe</strong></p>
+                    <p>Vitórias: 0</p>
+                </div>
+                <div id='cad'>
+                    <p><strong>Thiago</strong></p>
+                    <p>Vitórias: 0</p>
+                </div>
+                <div id='cad'>
+                    <p><strong>Kevin</strong></p>
+                    <p>Vitórias: 0</p>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3"> <h2>Próximo</h2>
+
+        <input id="nome" type="text" placeholder="Nome do jogador">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" onClick="joinPlayer(document.getElementById('nome').value)">Adicionar</button>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="javascript:joinPlayer('Gustavo')">Gustavo</a></li>
+                    <li><a href="javascript:joinPlayer('Felipe')">Felipe</a></li>
+                    <li><a href="javascript:joinPlayer('Thiago')">Thiago</a></li>
+                    <li><a href="javascript:joinPlayer('Kevin')">Kevin</a></li>
+                </ul>
+            </button>
+        </div>
+        
+        <!--                                                                   -->  
+        <!--<br><button onclick="joinPlayer('Gustavo')">Gustavo</button>
+        <br><button onclick="joinPlayer('Felipe')">Felipe</button>
+        <br><button onclick="joinPlayer('Thiago')">Thiago</button>-->
+
+        <h2>Fila</h2>
+        <p id="fila"></p>
+                
+    </div>
+
+    <div class="col-sm-9">
+        
+        <h2>Pontuação</h2>
+        <div class="row" id='pontuação'>
+            <div class="col-sm-1 vitórias" id='v1'>0</div>
+            <div class="col-sm-3" id='j1'>Jogador 1</div>
+            <div class="col-sm-4" id='placar'>0 X 0</div>
+            <div class="col-sm-3" id='j2'>Jogador 2</div>
+            <div class="col-sm-1 vitórias" id='v2'>0</div>
+        </div>
+
+        <!-- Placar anterior
+
+        <p id="pontuação">
+            <span class="vitorias" id="v1">		0						</span>
+            &ensp;								Jogador 1 	&nbsp;  : 	ensp;
+            <span id='placar'>					0 x 0					</span>
+            &ensp; : &nbsp;						Jogador 2 	&ensp;
+            <span class="vitorias" id="v2">		0						</span>
+        </p>
+        
+        -->
+        <div class="row">
+            <h2 id="overtime"></h2>
+            <div class="col-sm-3">
+                <button type="button" id="p1" onclick="adicionarPonto1()">Ponto Jogador 1</button>
+            </div>
+            <div class="col-sm-6">
+                <div class='row refresh'>
+                    <img class='refresh' src='refresh.png' onclick="inverterMesa()" style="cursor: pointer;" height="20px">		
+                </div>
+                <div class='row'>
+                    <p id="vitoria">
+                        <!--Gustavo venceu! 🏆<p class="message"><strong>Enter</strong> para iniciar próxima partida</p>-->
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <button type="button" id="p2" onclick="adicionarPonto2()">Ponto Jogador 2</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='row' id="opções">
+    <button id='gaveta' data-target="#options" data-toggle="collapse">Opções</button>
+
+    <div id="options" class="collapse">
+            <div class='row' id='config'>
+            <div class='col-sm-6'>
+                <div class='row'>
+                    <h4>Gerenciar vitórias</h4>
+                    <div class='col-sm-12'>
+                        <label for='pontos1'>Jogador 1:</label>
+                        <input type="number" class='opt' id='vit1'name="pontos1" onchange="editarVitorias1()">
+                        <br>
+                        <label for='pontos2'>Jogador 2:</label>
+                        <input type="number" class='opt' id='vit2'name="pontos2" onchange="editarVitorias2()">
+                    </div>
+                </div>	
+            </div>
+            <div class='col-sm-6'>
+                <h4>Gerenciar pontos</h4>
+                <div class='col-sm-12'>
+                    <label for='pontos1'>Jogador 1:</label>
+                    <input type="number" class='opt' id='pts1' name="pontos1" onchange="editarPonto1()"> 
+                    <br>
+                    <label for='pontos2'>Jogador 2:</label>
+                    <input type="number" class='opt' id='pts2' name="pontos2" onchange="editarPonto2()">
+                </div>
+            </div>
+            </div>
+
+        <button id='gaveta' data-target="#stats" data-toggle="collapse">Secret area</button>
+    </div>
+</div>
