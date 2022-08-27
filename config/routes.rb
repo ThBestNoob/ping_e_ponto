@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get "/about", to: "about#index"
 
+  get "/cadastros", to: "cadastros#index"
   
+  get "/historico", to: "historico#index"
 
 end

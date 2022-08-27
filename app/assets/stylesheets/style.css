@@ -107,7 +107,7 @@ input#nome {
 
 .test {
 	background-color: greenyellow;
-	positon: fixed;
+	position: fixed;
 	bottom: 0px;
 }	
 .header{
@@ -124,7 +124,7 @@ input#nome {
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 700;
 	text-align: right;
-	font-size: 34px;
+	font-size: 28px;
 	text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black;
 }
 .vitórias{
@@ -137,6 +137,7 @@ input#nome {
 	margin: 0;
 	padding: 0;
 	height: 30px;
+	width: 30px
 }
 input.opt {
 	font-size: 12px;
