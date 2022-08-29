@@ -1,41 +1,87 @@
-<div class="row main">
-
-    <!--d-flex justify-content-center-->
-    <div class="row" style="height: 750px; padding: 0;"> 
-        <div class='col-sm-6 description'> 
-            <h2><strong style='color: white'>Bem-vindo ao Ping e Ponto!</strong></h2><br>
-            <p>Chame todos da sua equipe para praticar esse esporte que une todas as áreas!</p>
-            <p>De CX a IS, RH ao MKT, todos podem chegar para jogar uma ou quantas partidas quiser.</p>
-            <p>Todos são bem-vindos! Competitivos, amistosos, principalmente quem quer aprender!</p>
-            <div class="row">
-                <div class="col-sm-6 d-flex justify-content-center">
-                    <%= link_to "Ver jogadores", cadastros_path, class: "btn"%>
+<div class= "header">
+    <div class="container">
+    <div class="d-flex justify-content-center">
+        <span>
+        <h2><strong style="color: white">Bem-vind@ ao Ping e Ponto!</strong></h2><br>
+        <p>Chame todos da sua equipe para praticar esse esporte que une todas as áreas!</p>
+        <p>De CX a IS, RH ao MKT, todos podem chegar para jogar uma ou quantas partidas quiser.</p>
+        <p>Todos são bem-vindos! Competitivos, amistosos, principalmente quem quer aprender!</p>
+        </span>
+    </div> 
+    </div>
+</div>
+<div class='main'>
+    <div class='row' style='margin: 20px 0'>
+        <div class='col-sm-2 title' style="position: abolute; height: 500px;">
+            <h2 style='text-align: center'>Jogadores</h2>
+            <p style='text-align: center'>Deixe sua marca</p>
+        </div>
+        <div class='col-sm-10 p-4 d-flex justify-content-between info-right'>
+            <div class="player-card">
+                <div class="player-picture">
+                    <img src="pictures/gustavo.png">
                 </div>
-                <div class="col-sm-6 d-flex justify-content-center">
-                    <%= link_to "Histórico de partidas", historico_path, class: "btn"%>
+                <div class="player-info">
+                    <h3>Gustavo</h3>
+                    <p>Customer Service</p>
                 </div>
             </div>
-        </div>
-        <div class='col-sm-6 d-flex justify-content-center' style='position: relative'>
-            <img src='table.png' height='400px' style='border-radius: 100px; position: absolute; bottom: 210px'>
-            <%= link_to "Jogar", placar_path,  class: "btn play-btn"%>
+            <div class="player-card">
+                <div class="player-picture">
+                    <img src="pictures/felipe.png">
+                </div>
+                <div class="player-info">
+                    <h3>Felipe</h3>
+                    <p>Customer Service</p>
+                </div>
+            </div>
+            <div class="player-card">
+                <div class="player-picture">
+                    <img src="pictures/thiago.png">
+                </div>
+                <div class="player-info">
+                    <h3>Thiago</h3>
+                    <p>Customer Service</p>
+                </div>
+            </div>
+            <div class="player-card">
+                <div class="player-picture">
+                    <img src="pictures/alysson.png">
+                </div>
+                <div class="player-info">
+                    <h3>Alysson</h3>
+                    <p>Inside Sales</p>
+                </div>
+            </div>
+            <div class="player-card">
+                <div class="player-picture">
+                    <img src="pictures/janaina.png">
+                </div>
+                <div class="player-info">
+                    <h3>Janaina</h3>
+                    <p>Inside Sales</p>
+                </div>
+            </div>
+            
         </div>
     </div>
-    <div class="row" style="margin: 20px 0; padding: 0;">
-        <div class="col-sm-4 coluna">
-            <div class="col-content">
-                <h2>Hall da fama</h2>
-            </div>
+
+    <div class='row' style='margin-top: 20px 0'>
+        <div class='col-sm-8 info-left'>
+
         </div>
-        <div class="col-sm-4 coluna">
-            <div class="col-content">
-                <h2>Últimas partidas</h2>
-            </div>
+        <div class='col-sm-4'>
+            
         </div>
-        <div class="col-sm-4 coluna">
-            <div class="col-content">
-                <h2>Leaderboard</h2>
-            </div>
+    </div>
+    <div class='row' style='margin: 20px 0'>
+        <div class='col-sm-4'>
+
+        </div>
+        <div class='col-sm-8 info-right'>
+
         </div>
     </div>
 </div>
+<div class='base'>
+</div>  

@@ -9,7 +9,7 @@ body {
 h2 {
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 700;
-	font-size: 36px;
+	font-size: 28px;
 	color:  black;
 	letter-spacing: -1px;
 }
@@ -24,7 +24,7 @@ h2#overtime{
 }
 p {
 	font-family: 'Montserrat', sans-serif;
-	font-size: 24px;
+	font-size: 18px;
 	letter-spacing: -1px;
 	margin: 1px;
 }
@@ -66,13 +66,9 @@ input#nome {
 	width: 	175px;
 }
 
-.col-sm-9{
-	
-}
 .btn{
 	font-family: 'Montserrat', sans-serif;
 	background-color: #0dbf2b;
-	border-color: black;
 	/*border: none;*/
 	color: white;
 	padding: 10px 10px;
@@ -101,7 +97,7 @@ input#nome {
 }
 
 .row{
-	padding-right: 10px;
+	padding: 0;
 	margin: 0;
 }
 
@@ -110,7 +106,7 @@ input#nome {
 	position: fixed;
 	bottom: 0px;
 }	
-.header{
+/* .header{
 	background-color: #0dbf2b;
 	color: white;
 	margin: 0px;
@@ -126,7 +122,7 @@ input#nome {
 	text-align: right;
 	font-size: 28px;
 	text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black;
-}
+} */
 .vitórias{
 	color: red;
 	padding-top: 30px;
@@ -415,3 +411,4 @@ button#gaveta{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: darkgreen;
+}

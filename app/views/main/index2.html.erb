@@ -1,0 +1,41 @@
+<div class="row main">
+
+    <!--d-flex justify-content-center-->
+    <div class="row" style="height: 750px; padding: 0;"> 
+        <div class='col-sm-6 description'> 
+            <h2><strong style='color: white'>Bem-vindo ao Ping e Ponto!</strong></h2><br>
+            <p>Chame todos da sua equipe para praticar esse esporte que une todas as áreas!</p>
+            <p>De CX a IS, RH ao MKT, todos podem chegar para jogar uma ou quantas partidas quiser.</p>
+            <p>Todos são bem-vindos! Competitivos, amistosos, principalmente quem quer aprender!</p>
+            <div class="row">
+                <div class="col-sm-6 d-flex justify-content-center">
+                    <%= link_to "Ver jogadores", jogadores_path, class: "btn"%>
+                </div>
+                <div class="col-sm-6 d-flex justify-content-center">
+                    <%= link_to "Histórico de partidas", historico_path, class: "btn"%>
+                </div>
+            </div>
+        </div>
+        <div class='col-sm-6 d-flex justify-content-center' style='position: relative'>
+            <img src='table.png' height='400px' style='border-radius: 100px; position: absolute; bottom: 210px'>
+            <%= link_to "Jogar", placar_path,  class: "btn play-btn"%>
+        </div>
+    </div>
+    <div class="row" style="margin: 20px 0; padding: 0;">
+        <div class="col-sm-4 coluna">
+            <div class="col-content">
+                <h2>Hall da fama</h2>
+            </div>
+        </div>
+        <div class="col-sm-4 coluna">
+            <div class="col-content">
+                <h2>Últimas partidas</h2>
+            </div>
+        </div>
+        <div class="col-sm-4 coluna">
+            <div class="col-content">
+                <h2>Leaderboard</h2>
+            </div>
+        </div>
+    </div>
+</div>

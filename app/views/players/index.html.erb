@@ -1,0 +1,18 @@
+<div class="container cads">
+    <div class="row">
+        <h1>Jogadores</h1>
+    </div>
+
+    <span><%= link_to "Novo jogador", new_player_path, class:"btn"%></span>
+    <% @players.each do |player|%>
+    <div class="row player">
+        <div class='col-sm-1'>
+            <div class='picture'></div>
+        </div>
+        <div class='col-sm-11'>
+            <h3><%= link_to player.nome, player%></h3>
+            <p>Vitórias: <%= player.vitorias%></p>
+        </div>
+    </div>
+    <% end %>
+</div>    

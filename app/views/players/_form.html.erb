@@ -1,0 +1,18 @@
+<%= form_with model: player do |form| %>
+    <div>
+        <%= form.label :nome %><br>
+        <%= form.text_field :nome %>
+        <% player.errors.full_messages_for(:nome).each do |message|%>
+        <div><%= message%></div>
+        <% end %>
+    </div>
+
+    <div>
+        <%= form.label :vitorias %><br>
+        <%= form.number_field :vitorias %>
+    </div>
+
+    <div>
+        <%= form.submit %>
+    </div>
+<% end %>

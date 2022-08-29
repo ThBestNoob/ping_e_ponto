@@ -1,0 +1,28 @@
+
+.row{
+    padding: 15px;
+}
+
+.player{
+    background-color: rgb(239, 238, 234);
+    border: 1px black solid;
+    border-radius: 15px;
+    padding: 10px 10px;
+    margin: 10px 0 !important;
+    text-decoration: none;
+}
+
+.picture{
+    border: 1px black solid;
+    border-radius: 20px;
+    height: 100%;
+}
+
+h3 a{
+    text-decoration: none;
+    color: black;
+}
+
+h3 a:hover{
+    color: darkgreen;
+}

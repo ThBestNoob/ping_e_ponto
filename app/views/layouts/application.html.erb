@@ -29,10 +29,11 @@
 
   <body>
     <%= render partial: "shared/header"%>
-    
-    <!--<%= render partial: "shared/flash"%>-->
+
+    <div class="page">    
+    <%= render partial: "shared/flash"%>
 
     <%= yield %>
-    
+    </div>
   </body>
 </html>
