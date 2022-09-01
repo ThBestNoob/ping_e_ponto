@@ -1,2 +1,0 @@
-class Jogador < ApplicationRecord
-end

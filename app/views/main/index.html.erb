@@ -11,12 +11,33 @@
     </div>
 </div>
 <div class='main'>
+
+<!-- Players -->
     <div class='row' style='margin: 20px 0'>
         <div class='col-sm-2 title' style="position: abolute; height: 500px;">
             <h2 style='text-align: center'>Jogadores</h2>
             <p style='text-align: center'>Deixe sua marca</p>
         </div>
         <div class='col-sm-10 p-4 d-flex justify-content-between info-right'>
+
+            <% 5.times do |i|%>
+            <div class="player-card">
+                <div class="player-picture">
+                    <% if @players[i].picture%>
+                        <img src="pictures/<%=@players[i].nome.downcase%>.png">
+                    <% else %>
+                        <img src="pictures/placeholder.png">
+                    <% end %>
+                    
+                </div>
+                <div class="player-info">
+                    <h3><%=@players[i].nome%></h3>
+                    <p>Customer Service</p>
+                </div>
+            </div>
+            <% end %>
+
+            <!--
             <div class="player-card">
                 <div class="player-picture">
                     <img src="pictures/gustavo.png">
@@ -26,54 +47,26 @@
                     <p>Customer Service</p>
                 </div>
             </div>
-            <div class="player-card">
-                <div class="player-picture">
-                    <img src="pictures/felipe.png">
-                </div>
-                <div class="player-info">
-                    <h3>Felipe</h3>
-                    <p>Customer Service</p>
-                </div>
-            </div>
-            <div class="player-card">
-                <div class="player-picture">
-                    <img src="pictures/thiago.png">
-                </div>
-                <div class="player-info">
-                    <h3>Thiago</h3>
-                    <p>Customer Service</p>
-                </div>
-            </div>
-            <div class="player-card">
-                <div class="player-picture">
-                    <img src="pictures/alysson.png">
-                </div>
-                <div class="player-info">
-                    <h3>Alysson</h3>
-                    <p>Inside Sales</p>
-                </div>
-            </div>
-            <div class="player-card">
-                <div class="player-picture">
-                    <img src="pictures/janaina.png">
-                </div>
-                <div class="player-info">
-                    <h3>Janaina</h3>
-                    <p>Inside Sales</p>
-                </div>
-            </div>
-            
+            -->            
         </div>
     </div>
 
+<!-- Leaderboard -->
+    <div class="leaderboard">
     <div class='row' style='margin-top: 20px 0'>
-        <div class='col-sm-8 info-left'>
-
+        <div class='col-sm-10 p-4 d-flex justify-content-between info-left'>
+    <!-- cards -->
+            <div class="player-card">
+                <img src="pictures/gustavo.png">
+            </div>
         </div>
-        <div class='col-sm-4'>
+    <!-- -->
+        <div class='col-sm-2'>
             
         </div>
     </div>
+    </div>
+<!-- History -->
     <div class='row' style='margin: 20px 0'>
         <div class='col-sm-4'>
 

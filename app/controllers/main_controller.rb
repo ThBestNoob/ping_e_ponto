@@ -1,14 +1,7 @@
 class MainController < ApplicationController
     def index
+        @players = Player.all.shuffle
     end
-
-    def placar
-    end
-
-    def pontuar
-        @jogador1 = {nome: "", ponto: ""}
-    end
-
 end
 
 

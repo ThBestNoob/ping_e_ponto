@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_29_175316) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_30_201825) do
   create_table "jogadors", force: :cascade do |t|
     t.string "nome"
     t.integer "vitorias"
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_29_175316) do
     t.integer "vitorias"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "picture"
   end
 
 end

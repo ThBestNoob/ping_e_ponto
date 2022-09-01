@@ -1,4 +1,7 @@
 class PlayersController < ApplicationController
+
+    http_basic_authenticate_with name: "gustavo", password: "senha123", except: [:index, :show]
+
     def index
         @players = Player.all
     end
@@ -44,6 +47,6 @@ class PlayersController < ApplicationController
     
     private
     def player_params
-        params.require(:player).permit(:nome, :vitorias)
+        params.require(:player).permit(:nome, :vitorias, :picture)
     end
 end
