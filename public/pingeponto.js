@@ -239,7 +239,6 @@ function nextPlayer(winner, perdedor){
 		return;
 
 	winner.vitorias++;
-	addWin(winner.name);
 	resetarPlacar();
 	onGame = true;	
 	hasWinner = false;
@@ -325,124 +324,9 @@ function removePlayer(index){
 	atualizarFila();
 }
 
-
-//___________Database Management______________________________________________________
-
-function addWin(winner){
-    for(element of cadastros)
-    {
-    	for(var i = 0; i < element.nome.length; i++)
-    	{
-
-         if(winner.toUpperCase() === element.nome[i])
-         {
-             element.vitorias++;
-
-             setCadastros();
-
-             updateStats();
-
-             return console.log(corrigirNome(winner) + ' está agora com ' + element.vitorias + ' vitórias.');
-        }
-      }
-    }
-    console.log('Cadastro não encontrado.');
-
-    return;
-}    
-
-function checkRegistration(nome){
-	
-	for(element of cadastros)
-  {
-  	for(var i = 0; i < element.nome.length; i++)
-  	{
-       if(nome.toUpperCase() === element.nome[i])
-       {
-       		return console.log(nome + ' já tem cadastro');					
-      }
-    }
-  }
-
-  console.log('Cadastro não encontrado. Criando um novo.');
-  
-  cadastros.push({nome: [nome.toUpperCase()], vitorias: 0});
-	setCadastros();  
-	updateStats();
-}
-
-function updateStats(){
-		let lista = '';
-		for(element of cadastros){
-			//lista += '<p style="font-size: 18px;">' + corrigirNome(element.nome[0]) + ': ' + element.vitorias + '</p>';
-			lista += "<div id='cad' onclick='joinPlayer(\"" + corrigirNome(element.nome[0]) + "\")'><p><strong>" + corrigirNome(element.nome[0]) + "</strong></p><p>Vitórias: " + element.vitorias + "</p></div>";
-		}
-
-		lista += '<p id="ponto">Importar cadastros:</br><button onclick="cadastrosPontomais()"><img src="pontomais.png" height="30px" style="vertical-align: top;"></button></p>'
-		document.getElementById('cadCol').innerHTML = lista
-}
-
-function addNickname(nome, novoApelido){
-	for(element of cadastros)
-  {
-  	for(var i = 0; i < element.nome.length; i++)
-  	{
-       if(nome.toUpperCase() === element.nome[i])
-       {
-       		element.nome.push(novoApelido.toUpperCase());
-       		setCadastros();  
-       		return console.log('Apelido "' + novoApelido.toUpperCase() + '" cadastrado com sucessso para ' + element.nome[0] + '.');					
-      }
-    }
-  }
-  return console.log('Cadastro não encontrado');
-}
-
-function backup(){
-	let d = new Date();
-	let backupName = 'Backup ' + String(d.getDate()) + '/' + String(d.getMonth()+1);
-
-	//Confere se já existe um backup no mesmo dia. Se sim, não sobrepõe o existente.
-
-	if(localStorage.getItem(backupName))
-	{
-		//localStorage.setItem(backupName + '.2', JSON.stringify(cadastros));
-		localStorage.setItem(backupName + '.2', JSON.stringify(cadastros));
-		return console.log('Criado uma segunda instância de ' + backupName);
-	}
-	else
-	{
-		localStorage.setItem(backupName, JSON.stringify(cadastros));	
-		console.log(backupName + ' criado com sucesso!');
-	}	
-}
-
-//-//-//-//-//-// CAUTION //-//-//-//-//-//-//-//-//-//
-
-function resetWins(temCerteza){
-	if(!temCerteza)
-		return console.log('Você quase zerou a quantidade de vitórias de todos os cadastros. Caso tenha certeza de que deseja prosseguir, utilize um argumento Truthy.');
-
-	for(element of cadastros){
-		element.vitorias = 0
-	}
-
-	setCadastros();
-	return console.log('As vitórias foram resetadas!')
-}	
-
-//-----------Funções auxiliares--------------------------------------------------
-
-
-function corrigirNome(nome){
-		nome = nome.charAt(0) + nome.slice(1).toLowerCase();
-    return nome;
-}
-
-
 //----------- Drag and Drop ---------------------------------------------------------------------
 
-let selectedPlayer, filaOriginal;
+var selectedPlayer, filaOriginal;
 let isDragging = false;
 
 function allowDrop(ev, lugar) {
@@ -458,9 +342,6 @@ function drag(ev, selected) {
   	console.log(selectedPlayer);
 
   	isDragging = false;
-
-	// Remove o selecionado da fila
-	// filaJogadores.push(filaJogadores[filaJogadores.length]);
 }
 
 function hover(lugar){
@@ -496,130 +377,4 @@ function drop(ev, lugar){
 	atualizarFila(jogador1.name, jogador2.name);
 
 	console.log(filaJogadores);
-
-	/*ev.preventDefault();
-	  var data = ev.dataTransfer.getData("text");
-	  console.log(data);
-	  ev.target.appendChild(document.getElementById(data));*/
 }
-
-//-------------------Sidebar----------------------------------------
-var isOpen = false;
-
-function togglePanel() {
-	if(isOpen){
-			document.getElementById("sidepanel").style.left = "-190px";
-		}else{
-			document.getElementById("sidepanel").style.left = "0px";
-	}  
-	isOpen = !isOpen;
-}
-var painelCadastros = false;
-
-function toggleCad() {
-	if(painelCadastros){
-			document.getElementById("cadPanel").style.right = "-500px";
-		}else{
-			document.getElementById("cadPanel").style.right = "0px";
-	}  
-	painelCadastros = !painelCadastros;
-}
-
-
-//-----------------------TESTE AJAX---------------------------
-
-function runPyScript(input){
-	var jqXHR = $.ajax({
-		type: "POST",
-		url: "database.py",
-		async: false,
-		data: { mydata: input}
-	});
-
-	return jqXHR.responseText;
-}
-
-//-Pega as informações do Database e retorna os cadastros já como lista
-function getCadastros(){
-	var jqXHR = $.ajax({
-		type: "GET",
-		url: "https://aprendendo-python-requests-default-rtdb.firebaseio.com/.json",
-		async: false,
-	});
-
-	let dataBase = JSON.parse(jqXHR.responseText);
-
-	return dataBase.Cadastros;
-}
-
-function setCadastros(){
-
-	let cad ={Cadastros: cadastros};
-
-	var jqXHR = $.ajax({
-		type: "PATCH",
-		url: "https://aprendendo-python-requests-default-rtdb.firebaseio.com/.json",
-		data: JSON.stringify(cad)
-	});
-
-	return jqXHR.responseText;
-}
-
-function cadastrosPontomais(){
-
-
-	/*var requis = $.ajax({
-		type: "GET",
-		url: "https://aprendendo-python-requests-default-rtdb.firebaseio.com/.json",
-		headers: "{ access-token: $2a$10$1xjETjQFvsVxAnuo4Rtre.7ejVLT1KCCdwqIvbRxmMfvZoyM4jIla'}"
-	});
-
-	return requis.responseText;*/
-
-	var settings = {
-	  "url": "https://api.pontomais.com.br/external_api/v1/employees?active=true&attributes=first_name,last_name&count=true&per_page=200&sort_direction=asc&sort_property=first_name&business_unit_id=73440",
-	  "method": "GET",
-	  "timeout": 0,
-	  "headers": {
-	    "access-token": "$2a$10$1xjETjQFvsVxAnuo4Rtre.7ejVLT1KCCdwqIvbRxmMfvZoyM4jIla"
-	  },
-	};
-
-	var requis = $.ajax(settings).done((response)=>{
-		console.log(response);
-		let dados = response.employees;
-
-		console.log(dados);
-		for(let i = 0; i < dados.length; i++){
-			checkRegistration(dados[i].first_name);
-			//console.log(dados[i]);
-		}
-	});	
-}
-
-function testReqs(){
-	var settings = {
-	  "url": "https://api.pontomais.com.br/external_api/v1/reports/work_days",
-	  "method": "POST",
-	  "timeout": 0,
-	  "headers": {
-	    "Content-Type": "application/json",
-	    "access-token": "$2a$10$1xjETjQFvsVxAnuo4Rtre.7ejVLT1KCCdwqIvbRxmMfvZoyM4jIla"
-	  },
-	  "data": JSON.stringify({
-	    "report": {
-	      "start_date": "2022-06-01",
-	      "end_date": "2022-07-31",
-	      "group_by": "employee",
-	      "row_filters": "with_inactives,has_time_cards",
-	      "columns": "date,shift_name,time_breaks,shift_appointments,time_cards,summary,extra_time,total_time,shift_time,custom_interval_time,overnight_time,registration_number,time_balance,motive, employee_id",
-	      "format": "json"
-	    }
-	  }),
-	};
-
-	$.ajax(settings).done(function (response) {
-	  console.log(response);
-	});	
-}
-
