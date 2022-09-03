@@ -12,6 +12,7 @@ h2 {
 	font-size: 28px;
 	color:  black;
 	letter-spacing: -1px;
+	margin: 10px 0;
 }
 
 h2#overtime{
@@ -63,7 +64,7 @@ button:hover{
 input#nome {
 	padding: 8px;
 	border-radius: 5px;
-	width: 	175px;
+	width: 	50%;
 }
 
 .btn{
@@ -214,13 +215,13 @@ button.remover {
 #j1{
 	font-family: 'Montserrat', sans-serif;
 	text-align: right;
-	padding-top: 30px;
+	padding: 30px;
 	height: 100px;
 }
 #j2{
 	font-family: 'Montserrat', sans-serif;
 	text-align: left;
-	padding-top: 30px;
+	padding: 30px;
 	height: 100px;
 }
 
