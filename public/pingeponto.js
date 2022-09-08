@@ -80,7 +80,7 @@ function adicionarPonto2(){
 	atualizarPlacar(jogador1.name, jogador2.name);	
 	checkScore();
 }
-
+//------------ Edição pontos
 function editarPonto1(){
 	pontos1 = document.getElementById('pts1').value;
 	atualizarPlacar(jogador1.name, jogador2.name);
@@ -89,7 +89,7 @@ function editarPonto2(){
 	pontos2 = document.getElementById('pts2').value;
 	atualizarPlacar(jogador1.name, jogador2.name);
 }
-
+//------------ Edição vitórias
 function editarVitorias1(){
 	jogador1.vitorias = document.getElementById('vit1').value;
 	atualizarPlacar(jogador1.name, jogador2.name);
@@ -323,6 +323,70 @@ function removePlayer(index){
 	filaJogadores.splice(index, 1);
 	atualizarFila();
 }
+
+document.onclick = function(e){
+	
+	if(e.target.id !== "results"){
+		document.getElementById('results').innerHTML = ''
+	}
+}
+
+//----------- Data base ------------------------------------------------------------------------
+
+
+function searchPlayer(search){
+	$.ajax({
+		url: '/search',
+		type: 'GET',
+		dataType: 'json',
+		// data: info,
+		data: {"search": search},
+
+		complete: function (jqXHR, textStatus) {
+			// callback
+
+			console.log(textStatus)
+		},  
+		success: function (data, textStatus, jqXHR) {
+			
+			results = ""
+
+            for(var i = 0; i < data.length; i++){
+                results += '<button class="row" onClick="joinPlayer(' + "'" + data[i].nome + "'" + ')"><div class="col-sm-4"><div class="pic"><img src="pictures/' 
+				
+				if(data[i].picture){
+					results += data[i].nome.toLowerCase() + '.png"></div></div><div class="col-sm-8">'	
+				}else{
+					results += 'placeholder.png"></div></div><div class="col-sm-8">'
+				}
+				
+				results += "<p>" + data[i].nome + "</p></div></button>"
+            }
+
+            document.getElementById('results').innerHTML = results
+		},  
+		error: function (jqXHR, textStatus, errorThrown) {
+			// do something if the request fails
+			console.log(jqXHR)
+			console.log(errorThrown)
+		}   
+	});
+}
+
+$("#nome").keyup( function() {
+    var searchQuery = document.getElementById('nome').value;
+
+    if(searchQuery == ""){
+        document.getElementById('results').innerHTML = ""
+        return
+    }    
+    searchPlayer(searchQuery)
+});
+
+function clearResults(){
+	document.getElementById('results').innerHTML = ""
+}
+
 
 //----------- Drag and Drop ---------------------------------------------------------------------
 

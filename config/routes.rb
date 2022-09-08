@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get "/placar", to: "placar#index"
 
+  get "/search", to: "placar#search"
+
   get "/about", to: "about#index"
 
   resources :players

@@ -7,9 +7,15 @@
     <% @players.each do |player|%>
     <div class="row player">
         <div class='col-sm-1'>
-            <div class='picture'></div>
+            <div class='picture'>
+            <% if player.picture%>
+                        <img src="pictures/<%=player.nome.downcase%>.png">
+                    <% else %>
+                        <img src="pictures/placeholder.png">
+                    <% end %>
+            </div>
         </div>
-        <div class='col-sm-11'>
+        <div class='col-sm-11' style="padding-left: 25px;">
             <h3><%= link_to player.nome, player%></h3>
             <p>Vitórias: <%= player.vitorias%></p>
         </div>

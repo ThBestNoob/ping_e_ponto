@@ -1,13 +1,15 @@
 <div class="row">    
     
-    <div class="col-sm-3"> <h2>Próximo</h2>
-
-        <input id="nome" type="text" placeholder="Nome do jogador">
-        <button type="button" class="btn btn-primary" onClick="joinPlayer(document.getElementById('nome').value)">Adicionar</button>
-        
+    <div class="col-sm-3 line" style="position: relative"> <h2>Próximo</h2>
+        <div class="row">
+            <input id="nome" type="text" placeholder="Nome do jogador" autocomplete="off">
+            <button type="button" class="btn btn-primary" onClick="joinPlayer(document.getElementById('nome').value)">Adicionar</button>
+            
+            <div id="results"></div>
+        </div>
+            
         <h2>Fila</h2>
         <p id="fila"></p>
-                
     </div>
 
     <div class="col-sm-9">

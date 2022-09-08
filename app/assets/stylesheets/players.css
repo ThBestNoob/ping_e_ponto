@@ -15,7 +15,15 @@
 .picture{
     border: 1px black solid;
     border-radius: 20px;
-    height: 100%;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+}
+
+.picture img{
+    position: absolute;
+    max-width: 100%;
 }
 
 h3 a{
