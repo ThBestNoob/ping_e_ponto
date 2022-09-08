@@ -436,7 +436,7 @@ button#gaveta{
 	margin: 0;
 	height: 50px;
 	width: 50px;
-	background-color: blue;
+	background-color: gray;
 	overflow: hidden;
 	border-radius: 15px;
 	vertical-align: middle;
@@ -445,6 +445,19 @@ button#gaveta{
 .pic img{
 	max-width: 100%;
 }
+
+.historico #pontuação{
+	margin: 5px 25px;
+	border-radius: 15px;
+}
+
+.historico #pontuação .pic{
+	background-color: #0dbf2b;
+	overflow: hidden;
+	height: 100px;
+	width: 100px;
+}
+
 
 /* Scrollbar*/
 ::-webkit-scrollbar {

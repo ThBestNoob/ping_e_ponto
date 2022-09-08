@@ -1,7 +1,7 @@
-var pontos1 = 0;
-var pontos2 = 0;
-var jogador1 = {name: undefined, vitorias: 0};
-var jogador2 = {name: undefined, vitorias: 0};
+var jogador1 = {name: undefined, id: 0, pontos: 0, vitorias: 0};
+var jogador2 = {name: undefined, id: 0, pontos: 0, vitorias: 0};
+
+var current_match = {player1: jogador1.id, player2: jogador2.id, score1: jogador1.pontos, score2: jogador2.pontos}
 
 var ultimoPonto;
 
@@ -44,8 +44,8 @@ function start(){
 		}
 	});
 
-	document.getElementById('pts1').value = pontos1;
-	document.getElementById('pts2').value = pontos2;
+	document.getElementById('pts1').value = jogador1.pontos;
+	document.getElementById('pts2').value = jogador2.pontos;
 	document.getElementById('vit1').value = jogador1.vitorias;
 	document.getElementById('vit2').value = jogador2.vitorias;	
 }
@@ -58,7 +58,7 @@ function adicionarPonto1(){
 		return;
 
   //Adiciona um ponto, atualiza o placar e confere a pontuação____________________
-	pontos1++;
+	jogador1.pontos++;
 
 	ultimoPonto = 1;
 	atualizarPlacar(jogador1.name, jogador2.name);
@@ -73,7 +73,7 @@ function adicionarPonto2(){
 		return;
 
 	//Adiciona um ponto, atualiza o placar e confere a pontuação____________________
-	pontos2++;  
+	jogador2.pontos++;
 
 	ultimoPonto = 2;
 
@@ -127,20 +127,20 @@ function resetarVitorias(){
 function atualizarPlacar(player1, player2){
 
 	//	Placar	
-	document.getElementById('placar').innerHTML = pontos1 + ' x ' + pontos2;
+	document.getElementById('placar').innerHTML = jogador1.pontos + ' x ' + jogador2.pontos;
 	document.getElementById('j1').innerHTML = player1;
 	document.getElementById('j2').innerHTML = player2;
 	document.getElementById('v1').innerHTML = jogador1.vitorias;
 	document.getElementById('v2').innerHTML = jogador2.vitorias;
 
 	// 	Opções
-	document.getElementById('pts1').value = pontos1;
-	document.getElementById('pts2').value = pontos2;	
+	document.getElementById('pts1').value = jogador1.pontos;
+	document.getElementById('pts2').value = jogador2.pontos;	
 }	
 
 function resetarPlacar(){
-	pontos1 = 0;
-	pontos2 = 0;
+	jogador1.pontos = 0;
+	jogador2.pontos = 0;
 }
 
 function checkScore(){
@@ -148,14 +148,14 @@ function checkScore(){
 	switch(overtime){
 
 		case false:
-			if(pontos1 == 7){
+			if(jogador1.pontos == 7){
 				winner(jogador1, 2);
 		 	}
 
-			if(pontos2 == 7){
+			if(jogador2.pontos == 7){
 				winner(jogador2, 1);
 			}
-			if(pontos1 == 6 && pontos2 == 6){
+			if(jogador1.pontos == 6 && jogador2.pontos == 6){
 				overtime = true;
 				document.getElementById('overtime').innerHTML = 'OVERTIME';
 				resetarPlacar();
@@ -163,16 +163,16 @@ function checkScore(){
 			break;
 
 		case true:
-			if(pontos1 == 2 && pontos2 == 0){
+			if(jogador1.pontos == 2 && jogador2.pontos == 0){
 				winner(jogador1, 2);
 			}	
-			if(pontos2 == 2 && pontos1 == 0){
+			if(jogador2.pontos == 2 && jogador1.pontos == 0){
 				winner(jogador2, 1);
 			}
-			if(pontos1 == 3){
+			if(jogador1.pontos == 3){
 				winner(jogador1, 2);
 			}
-			if(pontos2 == 3){
+			if(jogador1.pontos == 3){
 				winner(jogador2, 1);
 			}
 	 }		
@@ -182,7 +182,7 @@ function winner(winner, loser){
 
 	hasWinner = true;
 	onGame = false;
-	document.getElementById('vitoria').innerHTML = winner.name + ' venceu! 🏆<p class="message">Próximo: <strong>'  + filaJogadores[0] + '</strong><br><strong>Enter</strong> para iniciar próxima partida</p>';
+	document.getElementById('vitoria').innerHTML = winner.name + ' venceu! 🏆<p class="message">Próximo: <strong>'  + filaJogadores[0].name + '</strong><br><strong>Enter</strong> para iniciar próxima partida</p>';
 	vencedor = winner
 	perdedor = loser;
 	document.getElementById('overtime').innerHTML = ''; 
@@ -206,13 +206,13 @@ function inverterMesa(){
 
 //----------------------FILA---------------------
 
-function joinPlayer(nome){	
+function joinPlayer(nome, playerId){	
 
 	if(nome == '')
 		return;
 
 	if(jogador1.name && jogador2.name){
-		filaJogadores.push(nome);
+		filaJogadores.push({name: nome, id: playerId});
 		atualizarFila();
 		document.getElementById('nome').value = '';
 		return;
@@ -220,6 +220,7 @@ function joinPlayer(nome){
 
 	if(!jogador1.name){
 		jogador1.name = nome;
+		jogador1.id = playerId
 		atualizarPlacar(jogador1.name, 'Jogador 2');
 		document.getElementById('nome').value = '';
 		return;
@@ -227,6 +228,7 @@ function joinPlayer(nome){
 
 	if(!jogador2.name){
 		jogador2.name = nome;
+		jogador2.id = playerId
 		atualizarPlacar(jogador1.name, jogador2.name);
 		document.getElementById('nome').value = '';
 		return;
@@ -239,6 +241,10 @@ function nextPlayer(winner, perdedor){
 		return;
 
 	winner.vitorias++;
+
+	current_match = {player1: jogador1.id, player2: jogador2.id, score1: jogador1.pontos, score2: jogador2.pontos}
+	saveMatch(current_match)
+
 	resetarPlacar();
 	onGame = true;	
 	hasWinner = false;
@@ -255,40 +261,48 @@ function nextPlayer(winner, perdedor){
 		case 1:
 
 			if(jogador2.vitorias < 3){
-				filaJogadores.push(jogador1.name);
-				jogador1.name = filaJogadores[0];
+				filaJogadores.push({name: jogador1.name, id: jogador1.id});
+				jogador1.name = filaJogadores[0].name
+				jogador1.id = filaJogadores[0].id
 				filaJogadores.shift();
 
 			}else{
 				//adiciona ambos jogadores à fila, começando pelo que perdeu
-				filaJogadores.push(jogador1.name);
-				filaJogadores.push(jogador2.name);
+				filaJogadores.push({name: jogador1.name, id: jogador1.id});
+				filaJogadores.push({name: jogador2.name, id: jogador2.id});
 				jogador1.vitorias = 0;
 				jogador2.vitorias = 0;
 
 
-				jogador1.name = filaJogadores[0];
+				jogador1.name = filaJogadores[0].name;
+				jogador1.id = filaJogadores[0].id
 				filaJogadores.shift();
-				jogador2.name = filaJogadores[0];
+				jogador2.name = filaJogadores[0].name;
+				jogador2.id = filaJogadores[0].id
 				filaJogadores.shift();
 			}
 			jogador1.vitorias =  0;
 			break;
 		case 2:
 			if(jogador1.vitorias < 3){
-				filaJogadores.push(jogador2.name);
-				jogador2.name = filaJogadores[0];
+				filaJogadores.push({name: jogador2.name, id: jogador2.id});
+				jogador2.name = filaJogadores[0].name;
+				jogador2.id = filaJogadores[0].id
 				filaJogadores.shift();
 				
 			}else{
-				filaJogadores.push(jogador2.name);
-				filaJogadores.push(jogador1.name);
+				//adiciona ambos jogadores à fila, começando pelo que perdeu
+				filaJogadores.push({name: jogador2.name, id: jogador2.id});
+				filaJogadores.push({name: jogador1.name, id: jogador1.id});
 				jogador1.vitorias = 0;
 				jogador2.vitorias = 0;
 
-				jogador1.name = filaJogadores[0];
+
+				jogador1.name = filaJogadores[0].name;
+				jogador1.id = filaJogadores[0].id
 				filaJogadores.shift();
-				jogador2.name = filaJogadores[0];
+				jogador2.name = filaJogadores[0].name;
+				jogador2.id = filaJogadores[0].id
 				filaJogadores.shift();
 			}
 			jogador2.vitorias = 0;
@@ -311,7 +325,7 @@ function nextPlayer(winner, perdedor){
 function atualizarFila(){
 	var fila = '';
 	for(var i = 0; i < filaJogadores.length; i++){
-            fila += '<p draggable=true ondragstart="drag(event, ' + i +')" ondragover="allowDrop(event)" ondragenter="" ondrop="drop(event, ' + i + ')"><button class="remover" onclick="removePlayer(' + i + ')">X</button>' + filaJogadores[i] + '</p>'  
+            fila += '<p draggable=true ondragstart="drag(event, ' + i +')" ondragover="allowDrop(event)" ondragenter="" ondrop="drop(event, ' + i + ')"><button class="remover" onclick="removePlayer(' + i + ')">X</button>' + filaJogadores[i].name + '</p>'  
 		}
 	document.getElementById('fila').innerHTML = fila;
 }
@@ -327,7 +341,7 @@ function removePlayer(index){
 document.onclick = function(e){
 	
 	if(e.target.id !== "results"){
-		document.getElementById('results').innerHTML = ''
+		document.getElementById('results').innerHTML = "";
 	}
 }
 
@@ -352,7 +366,7 @@ function searchPlayer(search){
 			results = ""
 
             for(var i = 0; i < data.length; i++){
-                results += '<button class="row" onClick="joinPlayer(' + "'" + data[i].nome + "'" + ')"><div class="col-sm-4"><div class="pic"><img src="pictures/' 
+                results += '<button class="row" onClick="joinPlayer(' + "'" + data[i].nome + "'," + data[i].id + ')"><div class="col-sm-4"><div class="pic"><img src="pictures/' 
 				
 				if(data[i].picture){
 					results += data[i].nome.toLowerCase() + '.png"></div></div><div class="col-sm-8">'	
@@ -385,6 +399,31 @@ $("#nome").keyup( function() {
 
 function clearResults(){
 	document.getElementById('results').innerHTML = ""
+}
+
+function saveMatch(match){
+	$.ajax({
+		url: '/matches',
+		type: 'POST',
+		dataType: 'json',
+		data: {"match": match},
+
+		complete: function (jqXHR, textStatus) {
+			// callback
+
+			console.log(textStatus)
+		},  
+		success: function (data, textStatus, jqXHR) {
+			
+			console.log(data);
+
+		},  
+		error: function (jqXHR, textStatus, errorThrown) {
+			// do something if the request fails
+			console.log(jqXHR)
+			console.log(errorThrown)
+		}   
+	})
 }
 
 

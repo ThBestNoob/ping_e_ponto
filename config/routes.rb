@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   get "/about", to: "about#index"
 
   resources :players
+
+  resources :matches
   
-  get "/historico", to: "historico#index"
+  get "/historico", to: "matches#index"
 
   get "cadastrar", to: "registration#new"
 
