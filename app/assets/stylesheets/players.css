@@ -1,4 +1,4 @@
-
+ 
 .row{
     padding: 15px;
 }
@@ -33,4 +33,35 @@ h3 a{
 
 h3 a:hover{
     color: darkgreen;
+}
+
+.profile .pic{
+    border: 10px green solid;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.profile .historico{
+    height: 590px;
+    overflow-x: hidden;
+    direction: rtl;
+    border-radius: 5px;
+}
+
+.profile .historico .row{
+    direction: ltr;
+}
+
+.profile #pontuação{
+    margin: 5px 0;
+    border-radius: 25px;
+}
+
+.profile #id{
+    border: 2px gold solid;
+}
+
+.profile .stats{
+    background-color: white;
+    border-radius: 25px;
 }

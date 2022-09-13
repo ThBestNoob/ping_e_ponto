@@ -1,9 +1,40 @@
-<div class="container">
+<div class="container profile" style="padding-top: 25px;">
     <h1>Conheça 
         <%= @player.nome%>
     </h1>
+
     <%= link_to "Editar", edit_player_path, class: "btn"%>
     
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="pic">
+                <img src="/pictures/<%= @player.nome.downcase %>.png">
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 50px">
+        <h1>Histórico</h1>
+        <div class="col-sm-8 historico">
+            <% @matches.each do |match|%>
+            <div class="row" id='pontuação'>
+                <div class="col-sm-4" id='j1'>
+                    <%= Player.find(match.player1).nome %>
+                </div>
+                
+                <div class="col-sm-4" id='placar'><%= match.score1 %> X <%= match.score2 %></div>
+
+                <div class="col-sm-4" id='j2'>
+                    <%= Player.find(match.player2).nome %>
+                </div>
+            </div>  
+            <% end %>
+        </div>
+        <div class="col-sm-4 stats">
+            <h1></h1>
+        </div>
+    </div>
+
     <%= link_to "Excluir", player_path(@player), class: "btn", data: {
         turbo_method: :delete,
         turbo_confirm: "Tem certeza que deseja excluir o cadastro?"

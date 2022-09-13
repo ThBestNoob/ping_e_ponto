@@ -8,6 +8,7 @@ class PlayersController < ApplicationController
 
     def show
         @player = Player.find(params[:id])
+        @matches = Match.where(player1: params[:id]).or(Match.where(player2: params[:id]))
     end
 
     def new

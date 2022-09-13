@@ -430,7 +430,7 @@ function saveMatch(match){
 //----------- Drag and Drop ---------------------------------------------------------------------
 
 var selectedPlayer, filaOriginal;
-let isDragging = false;
+var isDragging = false;
 
 function allowDrop(ev, lugar) {
   	ev.preventDefault();
