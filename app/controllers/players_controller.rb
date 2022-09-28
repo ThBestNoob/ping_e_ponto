@@ -12,7 +12,8 @@ class PlayersController < ApplicationController
         @player = Player.find(params[:id])
         @matches = Match.where(winner: params[:id]).or(Match.where(loser: params[:id]))
         @wins = Match.where(winner: params[:id])
-        @winrate = (@wins.length.to_f / @matches.length.to_f * 100).to_s + "%"
+        rate = @wins.length.to_f / @matches.length.to_f * 100
+        @winrate = sprintf('%.2f', rate) + "%"
 
         if @matches.length < 10
             @winrate = "Jogue mais algumas partidas"
