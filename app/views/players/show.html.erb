@@ -19,19 +19,22 @@
             <% @matches.each do |match|%>
             <div class="row" id='pontuação'>
                 <div class="col-sm-4" id='j1'>
-                    <%= Player.find(match.player1).nome %>
+                    <%= Player.find(match.winner).nome %>
                 </div>
                 
-                <div class="col-sm-4" id='placar'><%= match.score1 %> X <%= match.score2 %></div>
+                <div class="col-sm-4" id='placar'><%= match.winner_score %> X <%= match.loser_score %></div>
 
                 <div class="col-sm-4" id='j2'>
-                    <%= Player.find(match.player2).nome %>
+                    <%= Player.find(match.loser).nome %>
                 </div>
             </div>  
             <% end %>
         </div>
         <div class="col-sm-4 stats">
-            <h1></h1>
+            <h2>Estatísticas</h2>
+            <p>Partidas: <%= @matches.length %></p>
+            <p>Vitórias: <%= @wins.length %></p>
+            <h2>Taxa de vitórias: <strong><%= @winrate %></strong></h2>
         </div>
     </div>
 

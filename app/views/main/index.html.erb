@@ -123,32 +123,32 @@
             <div class="row">
                 <div class="col-sm-6 slot">
                     <div class="d-flex justify-content-between" id='pontuação'>
-                        <div class="" id='j1'><%= Player.find(@matches[0].player1).nome %></div>
-                        <div class="" id='placar'><%= @matches[0].score1 %> X <%= @matches[0].score2 %></div>
-                        <div class="" id='j2'><%= Player.find(@matches[0].player2).nome %></div>
+                        <div class="" id='j1'><%= Player.find(@matches[0].winner).nome %></div>
+                        <div class="" id='placar'><%= @matches[0].winner_score %> X <%= @matches[0].loser_score %></div>
+                        <div class="" id='j2'><%= Player.find(@matches[0].loser).nome %></div>
                     </div>
                 </div>
                 <div class="col-sm-6 slot">
                     <div class="d-flex justify-content-between" id='pontuação'>
-                        <div class="" id='j1'><%= Player.find(@matches[1].player1).nome %></div>
-                        <div class="" id='placar'><%= @matches[1].score1 %> X <%= @matches[1].score2 %></div>
-                        <div class="" id='j2'><%= Player.find(@matches[1].player2).nome %></div>
+                        <div class="" id='j1'><%= Player.find(@matches[1].winner).nome %></div>
+                        <div class="" id='placar'><%= @matches[1].winner_score %> X <%= @matches[1].loser_score %></div>
+                        <div class="" id='j2'><%= Player.find(@matches[1].loser).nome %></div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-6 slot">
                     <div class="d-flex justify-content-between" id='pontuação'>
-                        <div class="" id='j1'><%= Player.find(@matches[2].player1).nome %></div>
-                        <div class="" id='placar'><%= @matches[2].score1 %> X <%= @matches[2].score2 %></div>
-                        <div class="" id='j2'><%= Player.find(@matches[2].player2).nome %></div>
+                        <div class="" id='j1'><%= Player.find(@matches[2].winner).nome %></div>
+                        <div class="" id='placar'><%= @matches[2].winner_score %> X <%= @matches[2].loser_score %></div>
+                        <div class="" id='j2'><%= Player.find(@matches[2].loser).nome %></div>
                     </div>
                 </div>
                 <div class="col-sm-6 slot">
                     <div class="d-flex justify-content-between" id='pontuação'>
-                        <div class="" id='j1'><%= Player.find(@matches[3].player1).nome %></div>
-                        <div class="" id='placar'><%= @matches[3].score1 %> X <%= @matches[3].score2 %></div>
-                        <div class="" id='j2'><%= Player.find(@matches[3].player2).nome %></div>
+                        <div class="" id='j1'><%= Player.find(@matches[3].winner).nome %></div>
+                        <div class="" id='placar'><%= @matches[3].winner_score %> X <%= @matches[3].loser_score %></div>
+                        <div class="" id='j2'><%= Player.find(@matches[3].loser).nome %></div>
                     </div>
                 </div>
             </div>

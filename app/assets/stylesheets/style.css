@@ -448,7 +448,7 @@ button#gaveta{
 
 .historico #pontuação{
 	margin: 5px 25px;
-	border-radius: 15px;
+	padding-top: 50px;	
 }
 
 .historico #pontuação .pic{

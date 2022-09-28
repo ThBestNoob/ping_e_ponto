@@ -2,16 +2,16 @@
 <div class="row">
     <h1>Aqui está o histórico de partidas</h1>
 
-    <% @matches.each do |match| %>
+    <% @matches.each do |match|%>
         <div class="row" id='pontuação'>
             <div class="col-sm-4" id='j1'>
-                <%= Player.find(match.player1).nome %>
+                <%= Player.find(match.winner).nome %>
             </div>
             
-            <div class="col-sm-4" id='placar'><%= match.score1 %> X <%= match.score2 %></div>
+            <div class="col-sm-4" id='placar'><%= match.winner_score %> X <%= match.loser_score %></div>
 
             <div class="col-sm-4" id='j2'>
-                <%= Player.find(match.player2).nome %>
+                <%= Player.find(match.loser).nome %>
             </div>
         </div>  
     <% end %>

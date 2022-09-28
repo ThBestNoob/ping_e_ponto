@@ -1,6 +1,8 @@
 class PlayersController < ApplicationController
 
-    http_basic_authenticate_with name: "gustavo", password: "senha123", except: [:index, :show]
+    http_basic_authenticate_with name: Rails.application.credentials.authenticate[:name],
+                                password: Rails.application.credentials.authenticate[:password], 
+                                except: [:index, :show]
 
     def index
         @players = Player.all
@@ -8,7 +10,13 @@ class PlayersController < ApplicationController
 
     def show
         @player = Player.find(params[:id])
-        @matches = Match.where(player1: params[:id]).or(Match.where(player2: params[:id]))
+        @matches = Match.where(winner: params[:id]).or(Match.where(loser: params[:id]))
+        @wins = Match.where(winner: params[:id])
+        @winrate = (@wins.length.to_f / @matches.length.to_f * 100).to_s + "%"
+
+        if @matches.length < 10
+            @winrate = "Jogue mais algumas partidas"
+        end
     end
 
     def new

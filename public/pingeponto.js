@@ -1,7 +1,12 @@
 var jogador1 = {name: undefined, id: 0, pontos: 0, vitorias: 0};
 var jogador2 = {name: undefined, id: 0, pontos: 0, vitorias: 0};
 
-var current_match = {player1: jogador1.id, player2: jogador2.id, score1: jogador1.pontos, score2: jogador2.pontos}
+var current_match = {
+	winner: jogador1.id,
+	loser: jogador2.id,
+	winner_score: jogador1.pontos,
+	loser_score: jogador2.pontos
+}
 
 var ultimoPonto;
 
@@ -149,11 +154,11 @@ function checkScore(){
 
 		case false:
 			if(jogador1.pontos == 7){
-				winner(jogador1, 2);
+				winner(jogador1, jogador2);
 		 	}
 
 			if(jogador2.pontos == 7){
-				winner(jogador2, 1);
+				winner(jogador2, jogador1);
 			}
 			if(jogador1.pontos == 6 && jogador2.pontos == 6){
 				overtime = true;
@@ -164,21 +169,29 @@ function checkScore(){
 
 		case true:
 			if(jogador1.pontos == 2 && jogador2.pontos == 0){
-				winner(jogador1, 2);
+				winner(jogador1, jogador2);
 			}	
 			if(jogador2.pontos == 2 && jogador1.pontos == 0){
-				winner(jogador2, 1);
+				winner(jogador2, jogador1);
 			}
 			if(jogador1.pontos == 3){
-				winner(jogador1, 2);
+				winner(jogador1, jogador2);
 			}
 			if(jogador1.pontos == 3){
-				winner(jogador2, 1);
+				winner(jogador2, jogador1);
 			}
 	 }		
 }
 
 function winner(winner, loser){
+
+	var current_match = {
+		winner: winner.id,
+		loser: loser.id,
+		winner_score: jogador1.pontos,
+		loser_score: jogador2.pontos
+	}
+	saveMatch(current_match)
 
 	hasWinner = true;
 	onGame = false;
@@ -242,9 +255,6 @@ function nextPlayer(winner, perdedor){
 
 	winner.vitorias++;
 
-	current_match = {player1: jogador1.id, player2: jogador2.id, score1: jogador1.pontos, score2: jogador2.pontos}
-	saveMatch(current_match)
-
 	resetarPlacar();
 	onGame = true;	
 	hasWinner = false;
@@ -258,7 +268,7 @@ function nextPlayer(winner, perdedor){
 		Se for a terceira vitória, coloca os dois no final da fila (perdedor na frente), e coloca os dois primeiros da fila no lugar.
 	*/
 	switch (perdedor){
-		case 1:
+		case jogador1:
 
 			if(jogador2.vitorias < 3){
 				filaJogadores.push({name: jogador1.name, id: jogador1.id});
@@ -283,7 +293,7 @@ function nextPlayer(winner, perdedor){
 			}
 			jogador1.vitorias =  0;
 			break;
-		case 2:
+		case jogador2:
 			if(jogador1.vitorias < 3){
 				filaJogadores.push({name: jogador2.name, id: jogador2.id});
 				jogador2.name = filaJogadores[0].name;
