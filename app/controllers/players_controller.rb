@@ -1,8 +1,10 @@
 class PlayersController < ApplicationController
 
-    http_basic_authenticate_with name: Rails.application.credentials.authenticate[:name],
-                                password: Rails.application.credentials.authenticate[:password], 
-                                except: [:index, :show]
+    # http_basic_authenticate_with name: Rails.application.credentials.authenticate[:name],
+    #                             password: Rails.application.credentials.authenticate[:password], 
+    #                             except: [:index, :show]
+
+    http_basic_authenticate_with name: "gustavo", password: "gustavo03", except: [:index, :show]
 
     def index
         @players = Player.all
