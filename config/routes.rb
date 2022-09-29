@@ -13,7 +13,17 @@ Rails.application.routes.draw do
   resources :matches
   
   get "/historico", to: "matches#index"
+  get "/teste", to: "matches#teste"
 
   get "cadastrar", to: "registration#new"
+
+
+  namespace :api do
+    namespace :v1 do
+
+
+
+    end
+  end
 
 end
