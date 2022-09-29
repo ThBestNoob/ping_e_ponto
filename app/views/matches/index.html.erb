@@ -8,7 +8,7 @@
                 <%= Player.find(match.winner).nome %>
             </div>
             
-            <div class="col-sm-4" id='placar'><%= match.score1 %> X <%= match.loser_score %></div>
+            <div class="col-sm-4" id='placar'><%= match.winner_score %> X <%= match.loser_score %></div>
 
             <div class="col-sm-4" id='j2'>
                 <%= Player.find(match.loser).nome %>
