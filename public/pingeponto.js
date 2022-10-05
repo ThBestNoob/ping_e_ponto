@@ -25,6 +25,7 @@ var filaJogadores = [];
 var cadastros = [];
 var backupCadastros = [];
 
+
 function start(){
 	document.addEventListener("keyup", function(e){
 		//console.log(e);
@@ -44,10 +45,16 @@ function start(){
 			case 'NumpadSubtract':
 				desfazerPonto(ultimoPonto);
 				atualizarPlacar(jogador1.name, jogador2.name);
-				break;
-
+				break;		
 		}
-	});
+	})
+
+	document.addEventListener('click', function(e){
+	
+		if(e.target.id !== "results"){
+			document.getElementById('results').innerHTML = "";
+		}
+	})
 
 	document.getElementById('pts1').value = jogador1.pontos;
 	document.getElementById('pts2').value = jogador2.pontos;
@@ -112,14 +119,14 @@ function desfazerPonto(jogador){
 	hasWinner = false;
 	switch(jogador){
 		case 1: 
-			if(pontos1 == 0)
+			if(jogador1.pontos == 0)
 				return;
-			pontos1--;
+			jogador1.pontos--;
 			break;
 		case 2:
-			if(pontos2 == 0)
+			if(jogador2.pontos == 0)
 				return;
-			pontos2--;
+			jogador2.pontos--;
 			break;
 	}
 }
@@ -348,12 +355,12 @@ function removePlayer(index){
 	atualizarFila();
 }
 
-document.onclick = function(e){
+// document.onclick = function(e){
 	
-	if(e.target.id !== "results"){
-		document.getElementById('results').innerHTML = "";
-	}
-}
+// 	if(e.target.id !== "results"){
+// 		document.getElementById('results').innerHTML = "";
+// 	}
+// }
 
 //----------- Data base ------------------------------------------------------------------------
 

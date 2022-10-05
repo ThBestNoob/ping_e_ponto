@@ -446,9 +446,12 @@ button#gaveta{
 	max-width: 100%;
 }
 
+.historico{
+	padding-top: 25px;
+}
+
 .historico #pontuação{
 	margin: 5px 25px;
-	padding-top: 50px;	
 }
 
 .historico #pontuação .pic{

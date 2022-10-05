@@ -3,7 +3,7 @@ class MatchesController < ApplicationController
     skip_before_action :verify_authenticity_token
 
     def index
-        @matches = Match.all
+        @matches = Match.all.order(id: :desc)
     end
 
     def create
