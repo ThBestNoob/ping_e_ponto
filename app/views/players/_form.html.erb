@@ -13,6 +13,11 @@
     </div>
 
     <div>
+        <%= form.label :time %><br>
+        <%= form.select :time, options_for_select(['Customer Service', 'Inside Sales', 'Marketing']) %>
+    </div>
+
+    <div>
         <%= form.label :picture %><br>
         <%= form.check_box :picture %>
     </div>

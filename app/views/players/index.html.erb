@@ -17,7 +17,7 @@
         </div>
         <div class='col-sm-11' style="padding-left: 25px;">
             <h3><%= link_to player.nome, player%></h3>
-            <p>Vitórias: <%= player.vitorias%></p>
+            <p>Vitórias: <%= Match.where(winner: player.id).count %></p>
         </div>
     </div>
     <% end %>
