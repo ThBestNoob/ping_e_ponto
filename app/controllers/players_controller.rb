@@ -7,7 +7,7 @@ class PlayersController < ApplicationController
     http_basic_authenticate_with name: "gustavo", password: "gustavo03", except: [:index, :show]
 
     def index
-        @players = Player.all
+        @players = Player.order(:id)
     end
 
     def show
