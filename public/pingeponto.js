@@ -8,6 +8,8 @@ var current_match = {
 	loser_score: jogador2.pontos
 }
 
+var ready = false;
+
 var ultimoPonto;
 
 var overtime = false;
@@ -27,6 +29,10 @@ var backupCadastros = [];
 
 
 function start(){
+	if(ready)
+		return
+
+	
 	document.addEventListener("keyup", function(e){
 		//console.log(e);
 		switch(e.code){
@@ -60,6 +66,8 @@ function start(){
 	document.getElementById('pts2').value = jogador2.pontos;
 	document.getElementById('vit1').value = jogador1.vitorias;
 	document.getElementById('vit2').value = jogador2.vitorias;	
+
+	ready = true
 }
 
 function adicionarPonto1(){
@@ -227,6 +235,11 @@ function inverterMesa(){
 //----------------------FILA---------------------
 
 function joinPlayer(nome, playerId){	
+
+	if(!ready)
+		start();
+
+	
 
 	if(nome == '')
 		return;
