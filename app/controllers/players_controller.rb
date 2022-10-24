@@ -4,7 +4,9 @@ class PlayersController < ApplicationController
     #                             password: Rails.application.credentials.authenticate[:password], 
     #                             except: [:index, :show]
 
-    http_basic_authenticate_with name: "gustavo", password: "gustavo03", except: [:index, :show]
+    http_basic_authenticate_with name: "gustavo", password: "gustavo03", except: [:create, :index, :show]
+
+    skip_before_action :verify_authenticity_token, :only => [:create]
 
     def index
         @players = Player.order(:id)
@@ -30,10 +32,18 @@ class PlayersController < ApplicationController
         @player = Player.new(player_params)
 
         if @player.save
-            redirect_to @player
+
+            @id = Player.last.id
+            respond_to do |format|
+                # format.json { render json: @player.id.to_json}
+                format.json {render json: @id.to_json}
+                format.html {redirect_to @player}
+            end
+            
         else
             render :new, status: :unprocessable_unity
         end
+        
     end
 
     def edit

@@ -5,6 +5,9 @@
     <% @matches.each do |match|%>
         <div class="row" id='pontuação'>
             <div class="col-sm-4" id='j1'>
+                <% if match.winner == nil || match.loser == nil%>
+                <%  next %>
+                <% end %>
                 <%= Player.find(match.winner).nome %>
             </div>
             
