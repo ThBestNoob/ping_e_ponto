@@ -8,7 +8,7 @@ class PlacarController < ApplicationController
             redirect_to placar_path and return
         else
             @parameter = params[:search].downcase
-            @results = Player.all.where("lower(nome) LIKE :search", search: "%#{@parameter}%")
+            @results = Player.all.where("lower(nome) LIKE :search", search: "%#{@parameter}%").order(:id)
             
             respond_to do |format|
                 format.json { render json: @results.to_json}

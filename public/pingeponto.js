@@ -10,7 +10,7 @@ var current_match = {
 
 var ready = false;
 
-var ultimoPonto;
+var historico = [{1: 0, 2: 0, "overtime": false}];
 
 var overtime = false;
 var onGame = true;
@@ -81,7 +81,10 @@ function adicionarPonto1(){
 	jogador1.pontos++;
 
 	ultimoPonto = 1;
+
 	atualizarPlacar(jogador1.name, jogador2.name);
+
+	historico.push({1: jogador1.pontos, 2: jogador2.pontos, "overtime": overtime})
 	checkScore();
 }
 
@@ -98,6 +101,8 @@ function adicionarPonto2(){
 	ultimoPonto = 2;
 
 	atualizarPlacar(jogador1.name, jogador2.name);	
+
+	historico.push({1: jogador1.pontos, 2: jogador2.pontos, "overtime": overtime})
 	checkScore();
 }
 //------------ Edição pontos
@@ -119,24 +124,24 @@ function editarVitorias2(){
 	atualizarPlacar(jogador1.name, jogador2.name);
 }
 
-function desfazerPonto(jogador){
-	if(!onGame){
-		return;
-	}
+function desfazerPonto(){
+
+	if(historico.length == 1)
+		return
+	
+	onGame = true
+	hasWinner = false
+
+	historico.pop()
+	jogador1.pontos = historico[historico.length - 1][1]
+	jogador2.pontos = historico[historico.length - 1][2]
+	overtime = historico[historico.length - 1]["overtime"] 
+	atualizarPlacar()
+
 	document.getElementById('vitoria').innerHTML = '';
-	hasWinner = false;
-	switch(jogador){
-		case 1: 
-			if(jogador1.pontos == 0)
-				return;
-			jogador1.pontos--;
-			break;
-		case 2:
-			if(jogador2.pontos == 0)
-				return;
-			jogador2.pontos--;
-			break;
-	}
+
+	if(!overtime)
+		document.getElementById('overtime').innerHTML = ''; 
 }
 
 function resetarVitorias(){
@@ -156,6 +161,10 @@ function atualizarPlacar(player1, player2){
 	// 	Opções
 	document.getElementById('pts1').value = jogador1.pontos;
 	document.getElementById('pts2').value = jogador2.pontos;	
+
+	// Adiciona ao histórico
+
+	//historico.push({1: jogador1.pontos, 2: jogador2.pontos})
 }	
 
 function resetarPlacar(){
@@ -177,6 +186,8 @@ function checkScore(){
 			}
 			if(jogador1.pontos == 6 && jogador2.pontos == 6){
 				overtime = true;
+
+				historico[historico.length - 1]["overtime"] = overtime;
 				document.getElementById('overtime').innerHTML = 'OVERTIME';
 				resetarPlacar();
 			}
@@ -200,21 +211,13 @@ function checkScore(){
 
 function winner(winner, loser){
 
-	var current_match = {
-		winner: winner.id,
-		loser: loser.id,
-		winner_score: jogador1.pontos,
-		loser_score: jogador2.pontos
-	}
-	saveMatch(current_match)
-
 	hasWinner = true;
 	onGame = false;
 	document.getElementById('vitoria').innerHTML = winner.name + ' venceu! 🏆<p class="message">Próximo: <strong>'  + filaJogadores[0].name + '</strong><br><strong>Enter</strong> para iniciar próxima partida</p>';
 	vencedor = winner
 	perdedor = loser;
 	document.getElementById('overtime').innerHTML = ''; 
-	overtime = false;		
+	overtime = false;
 }
 
 function inverterMesa(){
@@ -273,11 +276,37 @@ function nextPlayer(winner, perdedor){
 	if(!hasWinner)
 		return;
 
+
+	if(jogador1.id == undefined){
+		createPlayer(jogador1)
+		return
+	}
+
+	if(jogador2.id == undefined){
+		createPlayer(jogador2)
+		return
+	}
+
+
+	var current_match = {
+		winner: winner.id,
+		loser: perdedor.id,
+		winner_score: winner.pontos,
+		loser_score: perdedor.pontos
+	}
+	saveMatch(current_match)
+
 	winner.vitorias++;
 
 	resetarPlacar();
 	onGame = true;	
 	hasWinner = false;
+
+
+	console.log(jogador1)	
+	console.log(jogador2)	
+
+	
 
 	//-----------------------------------------
 	/*
@@ -347,6 +376,9 @@ function nextPlayer(winner, perdedor){
 
 	atualizarPlacar(jogador1.name, jogador2.name);
 
+
+	historico = [{1: 0, 2: 0, "overtime": false}];
+
 	//Remover o texto de vitória	
 	
 	document.getElementById('vitoria').innerHTML = '';
@@ -368,12 +400,12 @@ function removePlayer(index){
 	atualizarFila();
 }
 
-// document.onclick = function(e){
+document.onclick = function(e){
 	
-// 	if(e.target.id !== "results"){
-// 		document.getElementById('results').innerHTML = "";
-// 	}
-// }
+	if(e.target.id !== "results"){
+		document.getElementById('results').innerHTML = "";
+	}
+}
 
 //----------- Data base ------------------------------------------------------------------------
 
@@ -456,6 +488,36 @@ function saveMatch(match){
 	})
 }
 
+function createPlayer(jogador){
+	$.ajax({
+		url: '/players.json',
+		type: 'POST',
+		dataType: 'json',
+		// data: info,
+		data: {"player": {"nome": jogador.name}},
+
+		complete: function (jqXHR, textStatus) {
+			// callback
+
+			console.log(textStatus)
+		},  
+		success: function (data, textStatus, jqXHR) {
+			var response = $.parseJSON(data)
+			console.log("This is the return: " + response)
+
+			jogador.id = response
+
+			nextPlayer(vencedor, perdedor)
+			return 
+			
+		},  
+		error: function (jqXHR, textStatus, errorThrown) {
+			// do something if the request fails
+			console.log(jqXHR)
+			console.log(errorThrown)
+		}   
+	});
+}
 
 //----------- Drag and Drop ---------------------------------------------------------------------
 
