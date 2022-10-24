@@ -3,11 +3,11 @@
     <h1>Histórico de partidas</h1>
 
     <% @matches.each do |match|%>
+            <% if match.winner == nil || match.loser == nil%>
+                <%  next %>
+            <% end %>
         <div class="row" id='pontuação'>
             <div class="col-sm-4" id='j1'>
-                <% if match.winner == nil || match.loser == nil%>
-                <%  next %>
-                <% end %>
                 <%= Player.find(match.winner).nome %>
             </div>
             
